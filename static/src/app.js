@@ -64,7 +64,7 @@ class Server {
       rs.pipe(res)
     }
   }
-  // 分段传输数据
+  // 获取部分传输数据
   getStream(req, res, filepath, statObj) {
     let start = 0
     let end = statObj.size - 1
