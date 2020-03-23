@@ -9,7 +9,11 @@ const config = require('./config')
 const { promisify } = require('util')
 const stat = promisify(fs.stat)
 let readdir = promisify(fs.readdir)
-
+//编译模板，得到一个渲染的方法,然后传入实际数据数据就可以得到渲染后的HTML了
+function list() {
+  let tmpl = fs.readFileSync(path.resolve(__dirname, 'template', 'list.html'), 'utf8')
+  return handlebars.compile(tmpl)
+}
 /**
  * 1. 显示目录下面的文件列表和返回内容
  * 2. 实现压缩的功能
@@ -19,6 +23,7 @@ let readdir = promisify(fs.readdir)
 class Server {
   constructor() {
     this.config = config
+    this.list = list()
   }
   start() {
     const serve = http.createServer()
@@ -43,7 +48,17 @@ class Server {
       let statObj = await stat(filepath)
       if (statObj.isDirectory()) {
         // 如果是目录的话，应该显示目录下面的文件列表
-        // 这里去读取文件列表渲染
+        let files = await readdir(filepath)
+        files = files.map(file => ({
+          name: file,
+          url: path.join(pathname, file),
+        }))
+        let html = this.list({
+          title: pathname,
+          files,
+        })
+        res.setHeader('Content-Type', 'text/html')
+        res.end(html)
       } else {
         this.sendFile(req, res, filepath, statObj)
       }
