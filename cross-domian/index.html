@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>cros跨域</title>
+</head>
+
+<body>
+  <div>
+    全称Cross-Origin Resource Sharing [1]
+    是一种允许当前域（domain）的资源（比如html/js/web service）被其他域（domain）的脚本请求访问的机制
+  </div>
+  <script>
+    let xhr = new XMLHttpRequest()
+    xhr.open('GET', 'http://localhost:4000/say', true)
+    xhr.open('PUT', 'http://localhost:4000/info', true)
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        console.log(xhr.response)
+      }
+    }
+    xhr.send();
+    console.log(78);
+  </script>
+</body>
+
+</html>
