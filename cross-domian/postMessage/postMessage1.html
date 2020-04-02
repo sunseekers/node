@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>postMeaasge</title>
+</head>
+
+<body>
+  <div>
+    一个窗口引着另外一个窗口通过窗口进行通信；
+    <iframe src="http://localhost:4000/postMessage2.html" onload="load()" id="iframe"></iframe>
+  </div>
+  <script>
+    function load() {
+      let frame = document.getElementById('iframe')
+      frame.contentWindow.postMessage("i like", 'http://localhost:4000')
+      window.onmessage = e => {
+        console.log('返回回来的数据', e);
+      }
+    }
+  </script>
+</body>
+
+</html>
