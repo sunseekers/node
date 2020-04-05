@@ -3772,6 +3772,11 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+jwt-simple@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.npm.taobao.org/jwt-simple/download/jwt-simple-0.5.6.tgz#3357adec55b26547114157be66748995b75b333a"
+  integrity sha1-M1et7FWyZUcRQVe+ZnSJlbdbMzo=
+
 keyv@3.0.0:
   version "3.0.0"
   resolved "https://npm.xiaoheiban.cn/keyv/-/keyv-3.0.0.tgz#44923ba39e68b12a7cec7df6c3268c031f2ef373"
