@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>axios 发送请求</title>
+</head>
+
+<body>
+  <div>服务端过来的假数据</div>
+  <ul class="ul"></ul>
+  <script src='./axios.js'></script>
+  <script>
+    const axios = new Axios('/users.json')
+    axios.getAxios().then(res => {
+      const ul = document.querySelector(".ul")
+      ul.innerHTML = res.map(item => `<li>${item.name}</li>`).join("")
+    })
+  </script>
+</body>
+
+
+
+</html>
