@@ -1,5 +1,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FilePlugin = require('./src/plugins/filename')
+const InlinePlugin = require('./src/plugins/inline-plugin')
+
 
 module.exports = {
   entry: "./src/index.js",
@@ -9,7 +12,7 @@ module.exports = {
   },
   // 配置查找loader目录
   resolveLoader: {
-    modules: [path.resolve('node_modules'), path.resolve(__dirname, 'src', 'loaders')]
+    modules: [path.resolve('node_modules'), path.resolve(__dirname, 'src', 'loaders'), path.resolve(__dirname, 'src', 'plugins')]
   },
   module: {
     rules: [{
@@ -33,5 +36,9 @@ module.exports = {
       template: './src/login.html',
       filename: 'login.html',
     }),
+    new FilePlugin({
+      filename: "file.list.md"
+    }),
+    new InlinePlugin()
   ]
 }
